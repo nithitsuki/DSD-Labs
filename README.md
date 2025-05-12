@@ -14,7 +14,7 @@ A list of exercises that students need to demonstrate during the in-person labs 
 
 - [01 - Basic Verilog example](01-counter/) - software simulation to be shown on [EDA Playground](https://www.edaplayground.com/)
 - [02 - Counter on FPGA](02-counter-fpga/) - same design as above but on FPGA using ILA / VIO
-- [03 - Simple combinational adder](03-adder/) - Verilog code for adder to be interfaced with wrapper module with data communication using Pynq
+- [03 - Counter using FPGA pins](03-pins/) - Run a counter on the FPGA, but using the pins of the FPGA for control
 - [04 - Multiplier Critical Path](04-mult/) - changing the PL clock Pynq and relating to the critical path for a multiplier
 
 ## Preparation before lab
