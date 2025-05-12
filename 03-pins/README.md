@@ -22,11 +22,9 @@ Along with the location, we also need to specify the type of pin: the FPGA allow
 
 After mapping the pins in this way, we can synthesize the bit file as usual and program it onto the FPGA using JTAG.  There are no VIOs or ILAs in this design, so we cannot see the internal values.
 
-## Debouncing
+## Next step: up-down control
 
-After creating the module and running it, you may find that the counter does not behave as expected - it seems to run much faster than expected and toggles multiple times for each button press.  This is because the buttons *bounce* - there is a mechanical bouncing behaviour that causes the connection to make/break multiple times for each press.
-
-You can bypass this by putting in appropriate *debouncing* circuitry.  A brief outline of what happens and what you can do is given at https://nandland.com/debounce-a-switch/, and you can also search for other techniques.  Implement this and demonstrate the counter working on the FPGA board.
+Once you have the basic counter working, add logic to it to take one more input from one of the slide switches.  By changing the position of switch `SW0`, it should be possible to change from counting up (0, 1, 2, ...) to down (0, 15, 14, 13, ...).
 
 ## How to run
 
