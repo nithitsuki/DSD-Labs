@@ -480,6 +480,6 @@ proc check_status { } {
 # Run the script
 create_proj
 setup_runs
-#execute_runs
-#check_status
-#close_project
+execute_runs
+check_status
+close_project
