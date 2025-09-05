@@ -5,6 +5,16 @@ This project has a somewhat more complex structure than the others.  The core id
 - the design inside `mult.v` is a combinational logic block
 - it takes two inputs `a` and `b` of 32 bits each, and generates one output of 32 bits `c`.
 
+## Idea behind timing test
+
+Every combinational circuit (for example a multipler) has a certain critical path, which determines the maximum frequency at which inputs can be fed to it (max frequency is inversely proportional to critical path).  So if we want to check if a combinational component can operate at a given speed, we put registers in front of it and after it, feed data into the input registers (*launch*) and latch them into the output registers (*capture*). If we can change the clock period and repeat this process, we can test the maximum speed at which the circuit can operate.
+
+In our case, we use the [Pynq](https://pynq.io) software framework for this. Our FPGA has an ARM processor that runs Linux, and the Pynq project has already taken up the hard task of providing us a mechanism where we can write and read registers from the CPU, as well as control the clock signal sent into the FPGA fabric.  The details of how this works are out of scope of this lab.
+
+![](./mult-timing.svg)
+
+The figure shows the approximate setup. The details of how exactly the registers are made and connected, and how the software can tweak the inputs, collect the outputs, and change the clock, are all in the Python notebook provided with this exercise. Knowing how this works is not mandatory for this exercise, but we strongly encourage you to experiment. This is something that can only be done when you have access to a board with Pynq.
+
 ## Procedure
 
 ### Modify DUT
