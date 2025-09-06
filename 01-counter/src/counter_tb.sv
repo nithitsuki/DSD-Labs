@@ -29,15 +29,24 @@ module counter_tb();
 
     // Clock generation
     initial begin
-        // Fill in code here
+        clk = 0;
+        forever #5 clk = ~clk; // 10ns clock period
     end
 
     // Instance of student's module
     updown_counter dut(
+        .clk(clk),
+        .rst_n(rst_n),
+        .load(load),
+        .up_down(up_down),
+        .enable(enable),
+        .d_in(d_in),
+        .count(count)
     );
 
     initial begin
         test_passed = 1'b1;
+        //$monitor("Time: %0t | Count: %0h", $time, count);
         
         // Reset
         rst_n = 0;
@@ -82,12 +91,34 @@ module counter_tb();
             $display("Test 4 Failed: Disabled counter changed");
             test_passed = 1'b0;
         end
+        enable = 1; #10;
 
         // Test Case 5: Reset during operation
+        rst_n = 0;
+        #10;
+        if(count !== 4'h0) begin
+            $display("Test 5 Failed: Reset operation");
+            test_passed = 1'b0;
+        end
 
         // Test Case 6: Load while counting
+        rst_n = 1;
+        d_in = 4'h3;
+        load = 1;
+        #10;
+        if(count !== 4'h3) begin
+            $display("Test 6 Failed: Load while counting");
+            test_passed = 1'b0;
+        end
 
         // Test Case 7: Disable while counting
+        enable = 0;
+        #20;
+        if(count !== 4'h3) begin
+            $display("Test 7 Failed: Disable while counting");
+            test_passed = 1'b0;
+        end
+        enable = 1; #10;
 
         // Final check
         if (test_passed) begin
