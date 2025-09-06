@@ -25,5 +25,5 @@ module mult(
     input [31:0] b,
     output [31:0] c
     );
-    assign c = a * b;
+    assign c = a*a + b*b;
 endmodule
